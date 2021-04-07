@@ -1,0 +1,7 @@
+[{
+  "docker-image": "quay.io/mmclaugh/reserved-stock-processor:latest",
+  "required-topics": "orders,shipments,reserved-stock"
+},{
+  "docker-image": "quay.io/mmclaugh/available-stock-processor:latest",
+  "required-topics": "reserved-stock,stock-levels"
+}]
