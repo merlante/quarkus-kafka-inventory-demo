@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Usage ./run_demo_apps.sh <DEMO_PROJECT> <BOOTSTRAP_SERVERS> <KAFKA_CLIENT_ID> <KAFKA_CLIENT_SECRET>
+# Usage ./run_demo_apps.sh <DEMO_PROJECT> <BOOTSTRAP_SERVERS> <KAFKA_CLIENT_ID> <KAFKA_CLIENT_SECRET>  <KAFKA_TOKEN_ENDPOINT_URI>
 
 # Run this script with kafkacat, jq and oc available and oc logged into your cluster with permissions to create
 # a project. DEMO_PROJECT will be deleted if it already exists. Also ensure that the "demo_apps.json" file
 # is in the CWD. This script will create the project and deploy the apps of the demo to that project.
 
-if [ "$#" -ne 4 ]
+if [ "$#" -ne 5 ]
 then
-  echo "Usage ./run_demo.sh <DEMO_PROJECT> <BOOTSTRAP_SERVERS> <KAFKA_CLIENT_ID> <KAFKA_CLIENT_SECRET>"
+  echo "Usage ./run_demo.sh <DEMO_PROJECT> <BOOTSTRAP_SERVERS> <KAFKA_CLIENT_ID> <KAFKA_CLIENT_SECRET> <KAFKA_TOKEN_ENDPOINT_URI>"
   exit 1
 fi
 
@@ -16,6 +16,7 @@ DEMO_PROJECT=$1
 BOOTSTRAP_SERVERS=$2
 CLIENT_ID=$3
 CLIENT_SECRET=$4
+TOKEN_ENDPOINT_URI=$5
 
 echo "Running some checks..."
 
@@ -127,7 +128,8 @@ do
   oc new-app --namespace "${DEMO_PROJECT}" --docker-image="${docker_image}" \
              -e BOOTSTRAP_SERVERS="${BOOTSTRAP_SERVERS}" \
              -e CLIENT_ID="${CLIENT_ID}" \
-             -e CLIENT_SECRET="${CLIENT_SECRET}" > /dev/null
+             -e CLIENT_SECRET="${CLIENT_SECRET}" \
+             -e TOKEN_ENDPOINT_URI="${TOKEN_ENDPOINT_URI}" > /dev/null
 
   if [ $? -ne 0 ]
   then
@@ -140,7 +142,7 @@ done
 echo -e "All done.\n"
 
 echo "Waiting for deployments to complete..."
-kubectl wait --for=condition=available --timeout=60s --all deployments
+oc wait --for=condition=available --timeout=60s --all deployments
 echo -e "Done.\n"
 
 echo "Openshift cluster project:"
