@@ -8,7 +8,7 @@
 
 if [ "$#" -ne 5 ]
 then
-  echo "Usage ./run_demo.sh <DEMO_PROJECT> <BOOTSTRAP_SERVERS> <KAFKA_CLIENT_ID> <KAFKA_CLIENT_SECRET> <KAFKA_TOKEN_ENDPOINT_URI>"
+  echo "Usage ./run_demo_apps.sh <DEMO_PROJECT> <BOOTSTRAP_SERVERS> <KAFKA_CLIENT_ID> <KAFKA_CLIENT_SECRET> <KAFKA_TOKEN_ENDPOINT_URI>"
   exit 1
 fi
 
