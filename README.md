@@ -1,5 +1,15 @@
 # quarkus-kafka-inventory-demo project
 
+There are currently 2 parts to this project:
+1. Scripts to deploy the demo components. These are in the scripts directory. 
+2. A quarkus app that generates data and sets up the demo conditions.
+
+The idea is that the scripts will establish the following:
+* That a Red Hat OpenShift Streams for Apache Kafka cluster has been created.
+* That an Openshift project on a designated cluster is created.
+* That Kafka topic processing demo apps are installed and running on the Openshift cluster and connecting to the Kafka cluster.
+* They may also then kick off this quarkus app to connect to this setup and generate simulated inventory data representing indicative inventory management scenarios and the patternfly dashboard app (https://github.com/merlante/patternfly-inventory-demo-dashboard).
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
