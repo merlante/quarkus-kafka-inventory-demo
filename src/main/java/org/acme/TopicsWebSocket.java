@@ -30,14 +30,14 @@ public class TopicsWebSocket {
 
     @Incoming("orders")
     void ordersToSocket(Order order){
-        final String orderText = JsonbBuilder.create().toJson(order);
+        final String orderText = "orders:" + JsonbBuilder.create().toJson(order);
 
         textToSocket(orderText);
     }
 
     @Incoming("shipments")
     void shipmentsToSocket(Order shipment){
-        final String shipmentText = JsonbBuilder.create().toJson(shipment);
+        final String shipmentText = "shipments:" + JsonbBuilder.create().toJson(shipment);
 
         textToSocket(shipmentText);
     }
