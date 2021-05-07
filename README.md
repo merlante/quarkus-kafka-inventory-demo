@@ -14,6 +14,10 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+## Demo architecture
+
+![RHOSAK solution_ Inventory management - Demo architecture](https://user-images.githubusercontent.com/1330712/117438331-533da180-af29-11eb-8b8d-9a995ac836c6.png)
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
