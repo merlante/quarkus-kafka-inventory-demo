@@ -1,6 +1,8 @@
 package org.acme;
 
+import io.smallrye.reactive.messaging.kafka.Record;
 import org.acme.beans.Order;
+import org.acme.beans.Product;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 
 import javax.json.bind.JsonbBuilder;
@@ -40,6 +42,24 @@ public class TopicsWebSocket {
         final String shipmentText = "shipments:" + JsonbBuilder.create().toJson(shipment);
 
         textToSocket(shipmentText);
+    }
+
+    @Incoming("reserved-stock")
+    void reservedStockToSocket(Record<Product, Integer> record){
+        final String stockText = "reserved-stock:" +
+                record.key().getProductSku() + ":" +
+                Integer.valueOf(record.value());
+
+        textToSocket(stockText);
+    }
+
+    @Incoming("stock-levels")
+    void stockLevelsToSocket(Record<Product, Integer> record){
+        final String stockText = "reserved-stock:" +
+                record.key().getProductSku() + ":" +
+                Integer.valueOf(record.value());
+
+        textToSocket(stockText);
     }
 
     void textToSocket(String text) {
