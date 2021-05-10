@@ -73,3 +73,6 @@ do
   fi
 done
 
+echo -e "All done.\n"
+echo "Boostrap server:"
+rhoas kafka describe | jq -r .bootstrapServerHost
