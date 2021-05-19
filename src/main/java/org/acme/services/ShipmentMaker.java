@@ -1,19 +1,30 @@
 package org.acme.services;
 
-import io.smallrye.mutiny.Multi;
+import io.smallrye.mutiny.Uni;
 import io.smallrye.reactive.messaging.kafka.Record;
 import org.acme.beans.Order;
-import org.eclipse.microprofile.reactive.messaging.Incoming;
-import org.eclipse.microprofile.reactive.messaging.Outgoing;
+import org.eclipse.microprofile.reactive.messaging.*;
 
 import javax.enterprise.context.ApplicationScoped;
+import java.time.Duration;
+import java.util.Random;
 
 @ApplicationScoped
 public class ShipmentMaker {
+    private static final int FIXED_SHIPPING_DELAY = 10; //seconds
+    private static final int VARIABLE_SHIPPING_DELAY = 10; //seconds
 
-    @Incoming("orders")
-    @Outgoing("shipments-out")
-    public Multi<Record<String, Order>> generate(Multi<Record<String, Order>> orders) {
-        return orders;
+    private Random random = new Random(55);
+
+    @Channel("shipments-out")
+    Emitter<Record<String, Order>> emitter;
+
+    @Incoming("new-orders")
+    public void onNewOrders(Record<String, Order> orderRecord) {
+        Uni.createFrom().item(orderRecord)
+                .onItem()
+                .delayIt().by(Duration.ofSeconds(FIXED_SHIPPING_DELAY + random.nextInt(VARIABLE_SHIPPING_DELAY)))
+                .subscribe().with(item -> emitter.send(item)); // create shipments matching orders in N seconds time.
     }
+
 }
