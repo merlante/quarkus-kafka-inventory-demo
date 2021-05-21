@@ -55,7 +55,16 @@ public class TopicsWebSocket {
 
     @Incoming("stock-levels")
     void stockLevelsToSocket(Record<Product, Integer> record){
-        final String stockText = "reserved-stock:" +
+        final String stockText = "stock-levels:" +
+                record.key().getProductSku() + ":" +
+                Integer.valueOf(record.value());
+
+        textToSocket(stockText);
+    }
+
+    @Incoming("available-stock")
+    void availableStockToSocket(Record<Product, Integer> record){
+        final String stockText = "available-stock:" +
                 record.key().getProductSku() + ":" +
                 Integer.valueOf(record.value());
 
