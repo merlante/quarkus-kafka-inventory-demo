@@ -95,3 +95,7 @@ where $CLIENT_ID and $CLIENT_SECRET are the two vars stored in .env. (TODO: supp
 (This script installs any apps specified in scripts/demo_apps.json.)
 
 WARNING: If the specified project, i.e. kafka-inventory-demo, already exists, it will delete it and recreate everything.
+
+10. Go back to the browser dashboard and you should see, in the middle, reserved-stock messages (accumulating), and, on the right, a view of available stock updating in real-time.
+
+The reserved-stock plus available-stock should equal the overall stock-levels (on the left) for each SKU.
