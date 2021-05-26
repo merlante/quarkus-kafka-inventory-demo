@@ -3,5 +3,5 @@
   "required-topics": "orders,shipments,reserved-stock"
 },{
   "docker-image": "quay.io/mmclaugh/available-stock-processor:latest",
-  "required-topics": "reserved-stock,stock-levels"
+  "required-topics": "reserved-stock,stock-levels,available-stock"
 }]
