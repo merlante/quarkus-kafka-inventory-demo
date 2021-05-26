@@ -45,7 +45,7 @@ export BOOTSTRAP_SERVERS=<what_you_copied_from_the_output>
 ```bash
 rhoas serviceaccount create
 ```
-and follow the interactive prompt, choosing any 'name, the 'env' file format, and file location as '.env' the current 
+and follow the interactive prompt, choosing any 'name', the 'env' file format, and file location as '.env' the current 
 working directory (or wherever you want to run the demo commands from).
 ```
 Example:
@@ -60,7 +60,7 @@ Creating service account "my-service-account"
 Service account "my-service-account" created successfully with ID "ad967b4e-445d-4780-8bf0-xxxxxxxxxxx".
 Credentials saved to /Users/someuser/.env
 ```
-You now have authentication credentials stored in .env that allows an app to connect to your managed Kafka cluster.
+You now have authentication credentials stored in .env that allows the apps to connect to your managed Kafka cluster.
 
 5. Start the quarkus-kafka-inventory-demo app, which generates simulated orders, stock-levels, and, after a time period, 
    translates orders into shipments:
