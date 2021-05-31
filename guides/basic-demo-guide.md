@@ -88,7 +88,8 @@ For more details, see: https://docs.openshift.com/container-platform/4.7/cli_ref
   
 9. Deploy the kafka processing apps to a project on your Openshift cluster:
 ```bash
-scripts/run_demo_apps.sh kafka-inventory-demo $BOOTSTRAP_SERVERS $CLIENT_ID $CLIENT_SECRET https://identity.api.openshift.com/auth/realms/rhoas/protocol/openid-connect/token
+cd scripts
+./run_demo_apps.sh kafka-inventory-demo $BOOTSTRAP_SERVERS $CLIENT_ID $CLIENT_SECRET https://identity.api.openshift.com/auth/realms/rhoas/protocol/openid-connect/token
 ```
 where $CLIENT_ID and $CLIENT_SECRET are the two vars stored in .env. (TODO: supply from .env in a classy way!)
 
