@@ -34,6 +34,10 @@ scripts/create_kafka.sh my-inventory-demo orders shipments stock-levels reserved
 (As part of the script, the rhoas cli will prompt you to login. If a kafka cluster with the supplied name, 
 i.e. my-inventory-demo, already exists, it will reuse it, but will delete and recreate the topics specified.)
 
+| :warning: Note             |
+|:---------------------------|
+| For now, if you want to run this command again with a completely free slate, you'll have to manually delete internal available-stock-* topics as well. (This is a bug because the command should clear all state.)     |
+
 3. Set BOOTSTRAP_SERVERS in your environment. This is the url exposed by the Kafka cluster that apps will connect to.
 
 Copy the BOOTSTRAP_SERVERS var from the output of the create_kafka.sh script in the previous step, then export it:
