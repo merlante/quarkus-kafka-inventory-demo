@@ -34,6 +34,10 @@ scripts/create_kafka.sh my-inventory-demo orders shipments stock-levels reserved
 (As part of the script, the rhoas cli will prompt you to login. If a kafka cluster with the supplied name, 
 i.e. my-inventory-demo, already exists, it will reuse it, but will delete and recreate the topics specified.)
 
+| :warning: Note             |
+|:---------------------------|
+| For now, if you want to run this command again with a completely free slate, you'll have to manually delete internal available-stock-* topics as well. (This is a bug because the command should clear all state.)     |
+
 3. Set BOOTSTRAP_SERVERS in your environment. This is the url exposed by the Kafka cluster that apps will connect to.
 
 Copy the BOOTSTRAP_SERVERS var from the output of the create_kafka.sh script in the previous step, then export it:
@@ -45,7 +49,7 @@ export BOOTSTRAP_SERVERS=<what_you_copied_from_the_output>
 ```bash
 rhoas serviceaccount create
 ```
-and follow the interactive prompt, choosing any 'name, the 'env' file format, and file location as '.env' the current 
+and follow the interactive prompt, choosing any 'name', the 'env' file format, and file location as '.env' the current 
 working directory (or wherever you want to run the demo commands from).
 ```
 Example:
@@ -60,7 +64,7 @@ Creating service account "my-service-account"
 Service account "my-service-account" created successfully with ID "ad967b4e-445d-4780-8bf0-xxxxxxxxxxx".
 Credentials saved to /Users/someuser/.env
 ```
-You now have authentication credentials stored in .env that allows an app to connect to your managed Kafka cluster.
+You now have authentication credentials stored in .env that allows the apps to connect to your managed Kafka cluster.
 
 5. Start the quarkus-kafka-inventory-demo app, which generates simulated orders, stock-levels, and, after a time period, 
    translates orders into shipments:
@@ -88,10 +92,15 @@ For more details, see: https://docs.openshift.com/container-platform/4.7/cli_ref
   
 9. Deploy the kafka processing apps to a project on your Openshift cluster:
 ```bash
-scripts/run_demo_apps.sh kafka-inventory-demo $BOOTSTRAP_SERVERS $CLIENT_ID $CLIENT_SECRET https://identity.api.openshift.com/auth/realms/rhoas/protocol/openid-connect/token
+cd scripts
+./run_demo_apps.sh kafka-inventory-demo $BOOTSTRAP_SERVERS $CLIENT_ID $CLIENT_SECRET https://identity.api.openshift.com/auth/realms/rhoas/protocol/openid-connect/token
 ```
 where $CLIENT_ID and $CLIENT_SECRET are the two vars stored in .env. (TODO: supply from .env in a classy way!)
 
 (This script installs any apps specified in scripts/demo_apps.json.)
 
 WARNING: If the specified project, i.e. kafka-inventory-demo, already exists, it will delete it and recreate everything.
+
+10. Go back to the browser dashboard and you should see, in the middle, reserved-stock messages (accumulating), and, on the right, a view of available stock updating in real-time.
+
+The reserved-stock plus available-stock should equal the overall stock-levels (on the left) for each SKU.

@@ -1,4 +1,4 @@
-# Kafka Inventory Demo project
+# Kafka Inventory Management Demo project
 
 This project contains the scaffolding to run an Inventory Management Demo using Red Hat Openshift Streams for Apache Kafka. It is intended to be used to validate the developer experience of using the service in conjunction with other open source tooling, as well as provide a runnable and extendable demo that can be used for a range of purposes. It is also intended to be used to help people understand how Apache Kafka works, how it can be used to solve real world problems and possibly also for regression and/or performance testing of the service.
 
@@ -7,6 +7,12 @@ This project contains the scaffolding to run an Inventory Management Demo using 
 There are currently 2 parts to this project:
 1. Scripts to deploy the demo components. These are in the scripts directory. 
 2. A quarkus app that generates and processes data, and opens a websocket to make data available to browser based clients, e.g. the dashboard app.
+
+## Running the basic demo
+
+If you want to cut to the chase and run something, see [Running the Inventory Management "hello world" demo](https://github.com/merlante/quarkus-kafka-inventory-demo/blob/master/guides/basic-demo-guide.md).
+
+(The running instructions, below, refer just to the quarkus app (i.e. demo runner) in this project.)
 
 ## The Inventory Management "problem"
 
