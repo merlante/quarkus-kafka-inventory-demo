@@ -75,4 +75,4 @@ done
 
 echo -e "All done.\n"
 echo "Boostrap server:"
-rhoas kafka describe | jq -r .bootstrapServerHost
+rhoas kafka describe | jq -r .bootstrap_server_host
