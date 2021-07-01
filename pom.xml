@@ -12,10 +12,14 @@
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <quarkus-plugin.version>1.13.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>1.13.7.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>1.13.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>1.13.7.Final</quarkus.platform.version>
+    <!--<quarkus-plugin.version>999-SNAPSHOT</quarkus-plugin.version>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+    <quarkus.platform.version>999-SNAPSHOT</quarkus.platform.version>-->
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
   </properties>
   <dependencyManagement>
@@ -24,13 +28,6 @@
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>${quarkus.platform.artifact-id}</artifactId>
         <version>${quarkus.platform.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>1.13.0.Final</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -76,6 +73,10 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-websockets</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
     </dependency>
   </dependencies>
   <build>
