@@ -1,8 +1,6 @@
 package org.acme;
 
 import io.micrometer.core.annotation.Counted;
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import io.smallrye.reactive.messaging.kafka.Record;
@@ -12,18 +10,16 @@ import org.eclipse.microprofile.reactive.messaging.Incoming;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.jboss.logging.Logger;
 
 @ApplicationScoped
-public class TopicMetrics {
+public class TopicMeters {
 
     @Inject
     Logger log;
@@ -35,7 +31,7 @@ public class TopicMetrics {
 
     @PostConstruct
     void registerCustomMeters() {
-        registry.timer("inventorydemo.orders.roundtrip.millis");
+        ordersRoundTrip = registry.timer("inventorydemo.orders.roundtrip");
     }
 
     /* Simple counts of topic messages */

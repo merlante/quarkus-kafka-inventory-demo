@@ -22,31 +22,21 @@ public class OrderMaker {
     private Random random = new Random();
 
     @Outgoing("new-orders")
-    @Broadcast
+    @Broadcast(3)
     public Multi<Record<String, Order>> generate() {                  
         return Multi.createFrom().ticks().every(Duration.ofSeconds(5))
                 .onOverflow().drop()
                 .map(tick -> {
-                    if(tick.shortValue() == 0) {
-                        // Send a dummy order on tick 0. This avoids a bug where the first broadcast order is lost
-                        // to the slower of the 2 consumers to start up, resulting in lost stock reservations and an
-                        // incorrect stock count. Dummy order "wakes up" both consumers of new-orders, but makes no
-                        // reservations because the order is empty.
+                    int numEntries = random.nextInt(4) + 1;
+                    OrderEntry[] entries = IntStream.range(0, numEntries)
+                            .mapToObj(i -> new OrderEntry(
+                                    new Product("SKU-" + random.nextInt(10)),
+                                    random.nextInt(3) + 1))
+                            .toArray(OrderEntry[]::new);
 
-                        return Record.of("ORDER-0", new Order("ORDER-0", new OrderEntry[]{}));
-                    } else {
-                        int numEntries = random.nextInt(4) + 1;
-                        OrderEntry[] entries = IntStream.range(0, numEntries)
-                                .mapToObj(i -> new OrderEntry(
-                                        new Product("SKU-" + random.nextInt(10)),
-                                        random.nextInt(3) + 1))
-                                .toArray(OrderEntry[]::new);
+                    Order order = new Order("ORDER-" + tick.shortValue(), entries);
 
-                        Order order = new Order("ORDER-" + tick.shortValue(), entries);
-
-                        return Record.of(order.getOrderCode(), order);
-                    }
-
+                    return Record.of(order.getOrderCode(), order);
                 });
     }
 

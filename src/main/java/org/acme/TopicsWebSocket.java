@@ -30,21 +30,21 @@ public class TopicsWebSocket {
         sessions.remove(session);
     }
 
-    @Incoming("orders")
+    @Incoming("orders_broadcast")
     void ordersToSocket(Order order){
         final String orderText = "orders:" + JsonbBuilder.create().toJson(order);
 
         textToSocket(orderText);
     }
 
-    @Incoming("shipments")
+    @Incoming("shipments_broadcast")
     void shipmentsToSocket(Order shipment){
         final String shipmentText = "shipments:" + JsonbBuilder.create().toJson(shipment);
 
         textToSocket(shipmentText);
     }
 
-    @Incoming("reserved-stock")
+    @Incoming("reserved-stock_broadcast")
     void reservedStockToSocket(Record<Product, Integer> record){
         final String stockText = "reserved-stock:" +
                 record.key().getProductSku() + ":" +
@@ -53,7 +53,7 @@ public class TopicsWebSocket {
         textToSocket(stockText);
     }
 
-    @Incoming("stock-levels")
+    @Incoming("stock-levels_broadcast")
     void stockLevelsToSocket(Record<Product, Integer> record){
         final String stockText = "stock-levels:" +
                 record.key().getProductSku() + ":" +
@@ -62,7 +62,7 @@ public class TopicsWebSocket {
         textToSocket(stockText);
     }
 
-    @Incoming("available-stock")
+    @Incoming("available-stock_broadcast")
     void availableStockToSocket(Record<Product, Integer> record){
         final String stockText = "available-stock:" +
                 record.key().getProductSku() + ":" +
