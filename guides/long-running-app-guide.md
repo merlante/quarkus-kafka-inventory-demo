@@ -116,8 +116,11 @@ oc label svc quarkus-kafka-inventory-demo app-with-metrics=quarkus-kafka-invento
 11. To check if everything is working, go to the Openshift console in "</> Developer" mode, select "Monitoring". On the 
     monitoring page, select the "Metrics" tab. Click "Select query" and then "Custom query". Paste the following as the 
     query:
+```promql
+inventorydemo_orders_count_total
+```
 
-As the data points arrive, this query will graph the 
+As the data points arrive, this query will graph the orders count as it continues to increment.
 
 ## Useful metrics
 
