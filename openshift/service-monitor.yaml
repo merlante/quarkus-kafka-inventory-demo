@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: prometheus-app-monitor
+  name: prometheus-app-monitor
+  namespace: kafka-inventory-demo
+spec:
+  endpoints:
+  - interval: 30s
+    targetPort: 8080
+    scheme: http
+  selector:
+    matchLabels:
+      app-with-metrics: 'quarkus-kafka-inventory-demo'
