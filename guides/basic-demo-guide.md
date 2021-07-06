@@ -84,9 +84,12 @@ docker run --rm -d -p 9100:8080 quay.io/mmclaugh/patternfly-inventory-demo-dashb
 7. Open a browser and go to: http://localhost:9100. You should see the dashboard, with orders and shipments accumulating,
 and stock "SKUs" starting to appear as stock level bars.
  
-8. Log in to your Openshift cluster using 'oc':
+8. Log in to your Openshift cluster using 'oc'.
+With a browser, go to your Openshift Console page and click on the user account drop down on the top right of the screen (you should see your login name displayed). Click "Copy login command". In the new window that is spawned, click "Display Token". Copy the command line displayed under "Log in with this token" and paste it into the terminal.
+
+e.g.
 ```bash
-oc login
+oc login --token=sha256~XXXXXXXXXXXXXXXXXXXXXXXXXXXXX --server=https://cluster1234.containers.cloud.company.com:3333
 ```
 For more details, see: https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands
   
