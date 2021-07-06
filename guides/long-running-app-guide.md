@@ -147,7 +147,7 @@ oc expose svc/quarkus-kafka-inventory-demo -n kafka-inventory-demo
 
 2. Get the external url:
 ```bash
-oc describe route.route.openshift.io/quarkus-kafka-inventory-demo | grep Requested\ Host | awk -F ':[[:space:]]+' '{print $2}'
+oc get route.route.openshift.io/quarkus-kafka-inventory-demo -o json | jq -r '.spec.host'
 ```
 
 3. Put the url from the previous step and put it into a browser adding /q/metrics as the path.
