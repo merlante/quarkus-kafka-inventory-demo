@@ -14,6 +14,10 @@ If you want to cut to the chase and run something, see [Running the Inventory Ma
 
 (The running instructions, below, refer just to the quarkus app (i.e. demo runner) in this project.)
 
+## Running the demo as a long running app
+
+For the long running app guide, see [here](https://github.com/merlante/quarkus-kafka-inventory-demo/blob/master/guides/long-running-app-guide.md).
+
 ## The Inventory Management "problem"
 
 In the standard legacy ecommerce IT landscape, it is typical for there to be an ecommerce/order management system (OMS) and a warehouse management system (WMS). The OMS is the master of "Order", i.e. it tracks the full lifecycle of orders that have been placed and what status they are in. The WMS is the master of "Stock", i.e. what stock is physically located in the warehouse stock locations. In order to sell something on a website, the ecommere system must have a real-time view of available stock for product, or SKU (stock-keeping unit). In the simplest case, this is the total stock available in the warehouse minus the total stock that has already been "reserved" for fulfilling a previous order. (Just because there is 1 item of stock for a SKU remaining in the warehouse, doesn't mean you can keep selling the SKU until that item is dispatched -- you need one item reserved for each order.) The problem is that the OMS is the master of stock reservations and the WMS is the master of stock in the warehouse, so to do that subtraction across two systems in real-time is "hard".
