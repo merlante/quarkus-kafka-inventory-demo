@@ -140,12 +140,17 @@ deriv(inventorydemo_orders_roundtrip_seconds_sum[1m])
 You can expose the metrics endpoint outside the cluster by adding a route with oc expose. This may be useful for 
 debugging purposes.
 
-1. Expose the route:
+1. Set project:
+```bash
+oc project kafka-inventory-demo
+```
+
+2. Expose the route:
 ```bash
 oc expose svc/quarkus-kafka-inventory-demo -n kafka-inventory-demo
 ```
 
-2. Get the external url:
+3. Get the external url:
 ```bash
 oc get route.route.openshift.io/quarkus-kafka-inventory-demo -o json | jq -r '.spec.host'
 ```
