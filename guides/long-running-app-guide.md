@@ -62,9 +62,12 @@ Credentials saved to /Users/someuser/.env
 ```
 You now have authentication credentials stored in .env that allows the apps to connect to your managed Kafka cluster.
 
-5. Log in to your Openshift cluster using 'oc':
+5. Log in to your Openshift cluster using 'oc'.
+With a browser, go to your Openshift Console page and click on the user account drop down on the top right of the screen (you should see your login name displayed). Click "Copy login command". In the new window that is spawned, click "Display Token". Copy the command line displayed under "Log in with this token" and paste it into the terminal.
+
+e.g.
 ```bash
-oc login
+oc login --token=sha256~XXXXXXXXXXXXXXXXXXXXXXXXXXXXX --server=https://cluster1234.containers.cloud.company.com:3333
 ```
 For more details, see: https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands
 
