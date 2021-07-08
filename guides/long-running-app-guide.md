@@ -8,7 +8,8 @@ possible to observe the effect of changes to the service, such as upgrades, on u
 
 ## Architecture view
 
-![RHOSAK solution_ Inventory management - Long running app (1)](https://user-images.githubusercontent.com/1330712/124911141-57974100-dfe4-11eb-9aa1-3b3a80360f86.png)
+![RHOSAK solution_ Inventory management - Long running app (2)](https://user-images.githubusercontent.com/1330712/124965757-63055f00-e01a-11eb-996d-8d95108dab20.png)
+
 
 ### Measureables
 
