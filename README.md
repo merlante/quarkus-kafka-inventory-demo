@@ -16,7 +16,7 @@ If you want to cut to the chase and run something, see [Running the Inventory Ma
 
 ## Running the demo as a long running app
 
-For the long running app guide, see [here](https://github.com/merlante/quarkus-kafka-inventory-demo/blob/master/guides/long-running-app-guide.md).
+For the long running app guide, see [Inventory demo as a long running observable app](https://github.com/merlante/quarkus-kafka-inventory-demo/blob/master/guides/long-running-app-guide.md).
 
 ## The Inventory Management "problem"
 
