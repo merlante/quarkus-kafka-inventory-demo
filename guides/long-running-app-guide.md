@@ -10,8 +10,21 @@ possible to observe the effect of changes to the service, such as upgrades, on u
 
 ![RHOSAK solution_ Inventory management - Long running app (1)](https://user-images.githubusercontent.com/1330712/124911141-57974100-dfe4-11eb-9aa1-3b3a80360f86.png)
 
+### Measureables
 
-## Prerequisites
+The app randomly generates orders and stock-levels every X seconds. Shipments, the inverse of orders (shipped orders), are generated 1:1 from orders after a delay of Y seconds. Orders and shipments generate and release reserved-stock. Stock-levels and reserved-stock updates make changes to the available-stock changelog topic. The presence or absence of these messages, arriving at a certain rate, therefore indicate failures of specific quarkus apps. The round-trip time for orders to be produced and consumed from Kafka indicates variations in network latency and/or demo app and/or Kafka performance.
+
+Obvious things to measure/alert on:
+* counter: orders (should increment steadily)
+* counter: shipments (should increment steadily and be slightly behind orders)
+* counter: reserved-stock (some stock movements for every order/shipment -- helpful for determining if reserved-stock-processor is running)
+* counter: available-stock (updates triggered by reserved-stock and stock-levels -- helpful for determining if all pieces are running)
+* counter: order round-trips (should increment for each order round-trip -- from order round-trip micrometer Timer)
+* counter: order round-trip sum (increased by round-trip time for each round-strip -- from order round-trip micrometer Timer)
+
+## Installation
+
+### Prerequisites
 
 1. You have a Red Hat Openshift for Apache Kafka managed cluster. (See: https://developers.redhat.com/products/red-hat-openshift-streams-for-apache-kafka/getting-started.)
 2. rhoas cli is installed. (See https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli.)
@@ -20,7 +33,7 @@ possible to observe the effect of changes to the service, such as upgrades, on u
 5. jq tool is installed. (See https://stedolan.github.io/jq/.)
 6. kafkacat tool is installed. (See https://github.com/edenhill/kafkacat.)
 
-## Steps
+### Steps
 
 1. Clone this repo to get the scripts:
 ```bash
