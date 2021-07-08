@@ -11,7 +11,7 @@ possible to observe the effect of changes to the service, such as upgrades, on u
 ![RHOSAK solution_ Inventory management - Long running app (2)](https://user-images.githubusercontent.com/1330712/124965757-63055f00-e01a-11eb-996d-8d95108dab20.png)
 
 
-### Measureables
+### Measurables
 
 The app randomly generates orders and stock-levels every X seconds. Shipments, the inverse of orders (shipped orders), are generated 1:1 from orders after a delay of Y seconds. Orders and shipments generate and release reserved-stock. Stock-levels and reserved-stock updates make changes to the available-stock changelog topic. The presence or absence of these messages, arriving at a certain rate, therefore indicate failures of specific quarkus apps. The round-trip time for orders to be produced and consumed from Kafka indicates variations in network latency and/or demo app and/or Kafka performance.
 
