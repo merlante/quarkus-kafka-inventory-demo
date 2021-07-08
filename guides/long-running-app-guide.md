@@ -6,6 +6,10 @@ are running. Metrics are exposed to prometheus, running on Openshift, which can 
 performance of the app, as well as its connectivity with Red Hat Openshift Streams for Apache Kafka, over time. It is also 
 possible to observe the effect of changes to the service, such as upgrades, on uptime as perceived by the app.
 
+## Architecture view
+
+![RHOSAK solution_ Inventory management - Long running app (1)](https://user-images.githubusercontent.com/1330712/124911141-57974100-dfe4-11eb-9aa1-3b3a80360f86.png)
+
 
 ## Prerequisites
 
