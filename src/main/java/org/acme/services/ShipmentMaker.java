@@ -3,6 +3,7 @@ package org.acme.services;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.reactive.messaging.kafka.Record;
 import org.acme.beans.Order;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.reactive.messaging.*;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -11,10 +12,13 @@ import java.util.Random;
 
 @ApplicationScoped
 public class ShipmentMaker {
-    private static final int FIXED_SHIPPING_DELAY = 10; //seconds
-    private static final int VARIABLE_SHIPPING_DELAY = 10; //seconds
-
     private Random random = new Random(55);
+
+    @ConfigProperty(name = "inventorydemo.generated.shipments.fixed_shipping_delay.seconds", defaultValue="10")
+    Integer fixedShippingDelay;
+
+    @ConfigProperty(name = "inventorydemo.generated.shipments.variable_shipping_delay.upperbound.seconds", defaultValue="10")
+    Integer variableShippingDelay;
 
     @Channel("shipments-out")
     Emitter<Record<String, Order>> emitter;
@@ -23,7 +27,7 @@ public class ShipmentMaker {
     public void onNewOrders(Record<String, Order> orderRecord) {
         Uni.createFrom().item(orderRecord)
                 .onItem()
-                .delayIt().by(Duration.ofSeconds(FIXED_SHIPPING_DELAY + random.nextInt(VARIABLE_SHIPPING_DELAY)))
+                .delayIt().by(Duration.ofSeconds(fixedShippingDelay + random.nextInt(variableShippingDelay)))
                 .subscribe().with(item -> emitter.send(item)); // create shipments matching orders in N seconds time.
     }
 
