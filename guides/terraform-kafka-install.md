@@ -1,4 +1,4 @@
-# Creating Red Hat Openshift Streams for Apache Kafka cluster, topics and service account using terraform
+# Creating Red Hat Openshift Streams for Apache Kafka inventory demo cluster, topics and service account using terraform
 
 ## Steps
 
