@@ -48,6 +48,8 @@ scripts/create_kafka.sh my-inventory-demo orders shipments stock-levels reserved
 (As part of the script, the rhoas cli will prompt you to login. If a kafka cluster with the supplied name,
 i.e. my-inventory-demo, already exists, it will reuse it, but will delete and recreate the topics specified.)
 
+> Alternatively, terraform can be used to create the Kafka cluster, topics and service account. See [Creating Red Hat Openshift Streams for Apache Kafka inventory demo cluster, topics and service account using terraform](https://github.com/merlante/quarkus-kafka-inventory-demo/blob/master/guides/terraform-kafka-install.md).
+
 | :warning: Note             |
 |:---------------------------|
 | For now, if you want to run this command again with a completely free slate, you'll have to manually delete internal available-stock-* topics as well. (This is a bug because the command should clear all state.)     |
